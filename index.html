@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment1</title>
+        
+        <style>
+            img {
+                width: 300px;
+            }
+        </style>
+        
+    </head>    
+        
+    <body style="margin:100px">
+       <script type="text/javascript">
+            var angle = 0;
+            var img = document.getElementById('image');
+            var turn;
+            turn = function(){
+                angle+=90;
+                document.getElementById('image').style.transform = 'rotate('+angle+'deg)'; 
+                console.log("click received");
+                console.log(angle + " degrees")
+            };
+            
+        </script>
+        
+        <div style="margin:50px" id="buttonDiv" align="center">
+            <button id="button" name="button" onClick="turn();">Turn Image</button>
+        </div>
+        
+        <div align="center" id="imageDiv">
+           <img id="image" height="300px" width="300px" src="http://clipartzebraz.com/cliparts/square-clipart/cliparti1_square-clipart_05.jpg">
+        </div>
+        
+         
+        
+    </body>    
+</html>
