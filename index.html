@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>Assignment1</title>
-        
-        <style>
-            img {
-                width: 500px;
-            }
-        </style>
-        
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>    
         
-    <body style="margin:50px">
-       <script type="text/javascript">
-            var angle = 0;
-            var img = document.getElementById('image');
-            var turn;
-            turn = function(){
-                angle+=90;
-                document.getElementById('image').style.transform = 'rotate('+angle+'deg)'; 
-                console.log("click received");
-                console.log(angle + " degrees")
-            };
+    <body>
+       <script language="javascript" type="text/javascript" src="functions.js"></script>
+        
+        <div id="imageDiv">
+            <img id="image" src="http://www.arttherapyblog.com/uimages/2011/01/art-therapy-career2.jpg">
+            <div id="nextButton">
+                <button class="btnLarge" id="next" name="nextButton" onClick="next();">Next Image</button>
+            </div>
+            <div id="prevButton">
+                <button class="btnLarge" id="prev" name="prevButton" onClick="prev();">Previous Image</button>
+            </div>
             
-        </script>
-        
-        <div style="margin:20px" id="buttonDiv" align="center">
-            <button id="button" name="button" onClick="turn();">Turn Image</button>
         </div>
         
-        <div align="center" id="imageDiv">
-           <img id="image" height="500px" width="500px" src="http://wvs.topleftpixel.com/photos/2008/04/Dundas_Square_Pano_Fisheye_tunnel_crop.jpg">
+        <div class="buttons" id="buttonDiv">
+            <button class="btnSmall" id="rotate" name="rotateButton" onClick="turn();">Turn Image</button>
+            <button class="btnSmall" id="guess" name="guessButton" onClick="guess();">Guess</button>
         </div>
-        
+            
     </body>    
+    
 </html>
