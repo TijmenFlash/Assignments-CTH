@@ -1,13 +1,26 @@
 //global variables
-var images = ["http://www.arttherapyblog.com/uimages/2011/01/art-therapy-career2.jpg", 
-              "http://lifewallpaperz.com/images/2015/abstract-art/abstract-art-02.jpg",
-              "https://flavorwire.files.wordpress.com/2009/10/josef-albers-homage-to-the-square-midday-1954-57.jpg",
-              "http://cdn.hpdetijd.nl/wp-content/uploads/2013/05/Victory-Boogie-Woogie-fragment.-Piet-Mondriaan..jpg"
-];
-var angle = 0;
+var images = new Array(24);
+var angle = 360;
 var imageNumber = 0;
+var done = "http://images.vectorhq.com/images/previews/5f3/green-checkmark-and-red-minus-147478.png";
 
+var myRequest = new XMLHttpRequest();
+var method = "GET";
+var url = "http://www.europeana.eu/api/v2/search.json?wskey=DHtYfQfP5&query=abstract+paintings&start=100&rows=24&profile=standard";
 
+window.onload = function(){
+    document.getElementById("prev").style.visibility = "hidden"; 
+    document.getElementById("rotate").style.visibility = "hidden"; 
+    document.getElementById("guess").style.visibility = "hidden"; 
+};
+
+guessed = function(){
+    //hide game buttons when already guessed right
+    if(images[imageNumber] == done){
+        document.getElementById("rotate").style.visibility = "hidden"; 
+        document.getElementById("guess").style.visibility = "hidden"; 
+    }
+}
 
 //turn function
 turn = function(){
@@ -27,12 +40,12 @@ turn = function(){
 }
 
 
-
 //guess function
 guess = function(){
     if(angle==360){
         alert("thats right!");
-        images[imageNumber] = "http://images.vectorhq.com/images/previews/5f3/green-checkmark-and-red-minus-147478.png";
+        angle = "360";
+        images[imageNumber] = done;
         next();
     }else{
         alert("Wrong, try again!");
@@ -49,6 +62,11 @@ next = function(){
     }
     turn();  //"randomize" the angle
     document.getElementById('image').src = images[imageNumber];
+    document.getElementById('next').innerHTML = "Next Image";
+    document.getElementById('prev').style.visibility = 'visible';
+    document.getElementById("rotate").style.visibility = "visible"; 
+    document.getElementById("guess").style.visibility = "visible"; 
+    guessed();
     console.log("next received");
 }
 
@@ -62,5 +80,27 @@ prev = function(){
     }
     turn();  //"randomize" the angle
     document.getElementById('image').src = images[imageNumber];
+    document.getElementById('prev').innerHTML = "Previous Image";
+    document.getElementById("rotate").style.visibility = "visible"; 
+    document.getElementById("guess").style.visibility = "visible"; 
+    guessed();
     console.log("prev received");
+}
+
+
+myRequest.open(method, url);
+myRequest.send();
+
+myRequest.onreadystatechange = function(){
+    if (myRequest.readyState === 4) {
+        var data = myRequest.response;
+        var dataParsed = JSON.parse(data);
+        console.log(dataParsed);
+        var i;
+        for (i = 0; i < dataParsed.items.length; i++) {
+            images[i] = dataParsed.items[i].edmPreview[0];
+        }
+    } else {
+        console.log(myRequest.readyState);
+    }
 }
