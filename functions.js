@@ -6,7 +6,7 @@ var done = "http://images.vectorhq.com/images/previews/5f3/green-checkmark-and-r
 
 var myRequest = new XMLHttpRequest();
 var method = "GET";
-var url = "http://www.europeana.eu/api/v2/search.json?wskey=DHtYfQfP5&query=abstract+paintings&start=100&rows=24&profile=standard";
+var url = "http://www.europeana.eu/api/v2/search.json?wskey=DHtYfQfP5&query=abstract+paintings&qf=image&start=100&rows=24&profile=standard";
 
 window.onload = function(){
     document.getElementById("prev").style.visibility = "hidden"; 
